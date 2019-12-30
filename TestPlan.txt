@@ -1,5 +1,6 @@
 Test Plan:
 
+0) check login page title
 1) check elements existence
 2) check if input elements are 'holding' correct strings
 3) check empty strings x3
