@@ -3,12 +3,15 @@ Test Plan:
 * Test on different devices
 * Test of different browsers
 
-0) check login page title
+
 1) check elements existence
-2) check if input elements are 'holding' correct strings
+2) should have a correct email
+
+
 3) check empty strings x3
 4) check wrong values x3
-	4.1) invalid email address
+	
+	Password is required.
 5) check succesful  login
 6) check login option whicle already loged in
 7) check forgot password link
