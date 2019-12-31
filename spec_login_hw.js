@@ -31,5 +31,14 @@ describe('Protractor Login App', function() {
     login('a@b.', '123');
     expect(loginPage.getAlertText()).toEqual('Invalid email address.');
   });
-  
+
+  it('should have a correct password', function() {
+
+    login('dpolyak@outbrain.com', '');
+    expect(loginPage.getAlertText()).toEqual('Password is required.');
+
+    login('dpolyak@outbrain.com', '123');
+    expect(loginPage.getAlertText()).toEqual('Invalid password.');
+  });
+
 });
