@@ -1,22 +1,35 @@
-// spec.js
+var loginPage = require('./login_page.js');
+
 describe('Protractor Login App', function() {
-  var email = element(by.id('email'));
-  var password = element(by.id('passwd'));
+
+  function login(email, pwd) {
+    loginPage.setEmail(email);
+    loginPage.setPassword(email);
+    loginPage.submit();
+  }
 
   beforeEach(function() {
-    browser.waitForAngularEnabled(false);
-    browser.get('http://automationpractice.com/index.php?controller=authentication&back=my-account');
+    loginPage.get();
   });
 
-  it('should have a title', function() {
-    expect(browser.getTitle()).toEqual('Login - My Store');
+  it('should include login elements', function() {
+    expect(loginPage.isEmailElementPresent()).toBe(true);
+    expect(loginPage.isPasswordElementPresent()).toBe(true);
+    expect(loginPage.isSubmitButtonPresent()).toBe(true);
   });
 
-  it('should read the value from an input', function() {
-    email.sendKeys(1);
-    expect(email.getAttribute('value')).toEqual('1');
-    password.sendKeys(2);
-    expect(password.getAttribute('value')).toEqual('2');
+  it('should have a correct email', function() {
+    login('', '');
+    expect(loginPage.getAlertText()).toEqual('An email address required.');
+
+    login('', '123');
+    expect(loginPage.getAlertText()).toEqual('An email address required.');
+
+    login('a', '');
+    expect(loginPage.getAlertText()).toEqual('Invalid email address.');
+
+    login('a@b.', '123');
+    expect(loginPage.getAlertText()).toEqual('Invalid email address.');
   });
   
 });
