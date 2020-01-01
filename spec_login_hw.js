@@ -4,7 +4,7 @@ describe('Protractor Login App', function() {
 
   function login(email, pwd) {
     loginPage.setEmail(email);
-    loginPage.setPassword(email);
+    loginPage.setPassword(pwd);
     loginPage.submit();
   }
 
