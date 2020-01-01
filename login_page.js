@@ -1,14 +1,14 @@
 var LoginPage = function() {
+  var loginFormHeader = element(by.css('#login_form h3.page-subheading'));
   var email = element(by.id('email'));
   var password = element(by.id('passwd'));
   var submitLogin = element(by.id('SubmitLogin'));
-  var alert = element(by.css('.alert.alert-danger ol li'));
-  var login = element(by.css('a.login'));
-  var logout = element(by.css('a.logout'));
+  var lostPassword = element(by.css('.lost_password.form-group a'));
+  var alert_message = element(by.css('.alert.alert-danger ol li'));
+  var page_url = 'http://automationpractice.com/index.php?controller=authentication&back=my-account';
 
   this.get = function() {
-    browser.waitForAngularEnabled(false);
-    browser.get('http://automationpractice.com/index.php?controller=authentication&back=my-account');
+    browser.get(page_url);
   };
 
   this.isEmailElementPresent = function() {
@@ -23,27 +23,17 @@ var LoginPage = function() {
     return submitLogin.isPresent();
   }
 
-  this.isLoginButtonPresent = function() {
-    return login.isPresent();
-  }
-
-  this.isLogoutButtonPresent = function() {
-    return logout.isPresent();
-  }
-
-  this.clearEmail = function() {
-    email.clear();
-  }
-
-  this.clearPassword = function() {
-    password.clear();
+  this.isLostPasswordLinkPresent = function() {
+    return lostPassword.isPresent();
   }
 
   this.setEmail = function(user) {
+    email.clear();
     email.sendKeys(user);
   };
 
   this.setPassword = function(pwd) {
+    password.clear();
     password.sendKeys(pwd);
   };
 
@@ -51,9 +41,21 @@ var LoginPage = function() {
     submitLogin.click();
   }
 
+  this.lostPassword = function() {
+    lostPassword.click();
+  }
+
   this.getAlertText = function() {
-    return alert.getText();
+    return alert_message.getText();
   };
+
+  this.getLoginFormHeader = function() {
+    return loginFormHeader.getText();
+  }
+
+  this.getLostPasswordText = function() {
+    return lostPassword.getText();
+  }
 };
 
 module.exports = new LoginPage();

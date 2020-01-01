@@ -1,4 +1,5 @@
 var loginPage = require('./login_page.js');
+var accoutPage = require('./my_account_page.js');
 
 describe('Protractor Login App', function() {
 
@@ -8,17 +9,36 @@ describe('Protractor Login App', function() {
     loginPage.submit();
   }
 
+  beforeAll(function() {
+    browser.waitForAngularEnabled(false);
+  });
+
   beforeEach(function() {
-    //browser.driver.sleep(3000);
     loginPage.get();
-    loginPage.clearEmail();
-    loginPage.clearPassword();
+  });
+
+  afterEach(function() {
+    browser.driver.sleep(2000);
   });
 
   it('should include login elements', function() {
+    expect(loginPage.getLoginFormHeader()).toEqual('ALREADY REGISTERED?');
     expect(loginPage.isEmailElementPresent()).toBe(true);
     expect(loginPage.isPasswordElementPresent()).toBe(true);
     expect(loginPage.isSubmitButtonPresent()).toBe(true);
+    expect(loginPage.getLostPasswordText()).toEqual('Forgot your password?');
+  });
+
+  it('should have a user info', function() {
+    login('dpolyak@outbrain.com', '123qwe');
+    expect(accoutPage.getUserInfo()).toEqual('D P');
+    accoutPage.logout();
+  });
+
+  it('should have a user info', function() {
+    login('DPOLYAK@OUTBRAIN.COM', '123qwe');
+    expect(accoutPage.getUserInfo()).toEqual('D P');
+    accoutPage.logout();
   });
 
   it('should have an email', function() {
@@ -51,4 +71,9 @@ describe('Protractor Login App', function() {
     expect(loginPage.getAlertText()).toEqual('Authentication failed.');
   });
 
+  it('should have forgot password action', function() {
+    loginPage.lostPassword();
+    expect(browser.getCurrentUrl()).toEqual("http://automationpractice.com/index.php?controller=password");
+  });
+  
 });
