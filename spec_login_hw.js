@@ -22,11 +22,11 @@ describe('Protractor Login App', function() {
   });
 
   it('should include login elements', function() {
-    expect(loginPage.getLoginFormHeader()).toEqual('ALREADY REGISTERED?');
+    expect(loginPage.getLoginFormHeader()).toEqual(loginPage.LOGIN_FORM_HEADER);
     expect(loginPage.isEmailElementPresent()).toBe(true);
     expect(loginPage.isPasswordElementPresent()).toBe(true);
     expect(loginPage.isSubmitButtonPresent()).toBe(true);
-    expect(loginPage.getLostPasswordText()).toEqual('Forgot your password?');
+    expect(loginPage.getLostPasswordText()).toEqual(loginPage.LOST_PASSWORD_MSG);
   });
 
   it('should have a user info', function() {
@@ -43,37 +43,37 @@ describe('Protractor Login App', function() {
 
   it('should have an email', function() {
     login('', '');
-    expect(loginPage.getAlertText()).toEqual('An email address required.');
+    expect(loginPage.getAlertText()).toEqual(loginPage.EMAIL_ADDRESS_REQUIRED_MSG);
   });
 
   it('should have a valide email', function() {
     login('a', '');
-    expect(loginPage.getAlertText()).toEqual('Invalid email address.');
+    expect(loginPage.getAlertText()).toEqual(loginPage.INVALID_EMAIL_ADDRESS_MSG);
   });
 
   it('should have a valide email', function() {
     login('a@@b.com', '123');
-    expect(loginPage.getAlertText()).toEqual('Invalid email address.');
+    expect(loginPage.getAlertText()).toEqual(loginPage.INVALID_EMAIL_ADDRESS_MSG);
   });
 
   it('should have a password', function() {
     login('dpolyak@outbrain.com', '');
-    expect(loginPage.getAlertText()).toEqual('Password is required.');
+    expect(loginPage.getAlertText()).toEqual(loginPage.PASSWORD_REQUIRED_MSG);
   });
 
   it('should have a valid password', function() {
     login('dpolyak@outbrain.com', '123');
-    expect(loginPage.getAlertText()).toEqual('Invalid password.');
+    expect(loginPage.getAlertText()).toEqual(loginPage.INVALID_PASSWORD_MSG);
   });
 
   it('should have a correct password', function() {
     login('dpolyak@outbrain.com', '123456');
-    expect(loginPage.getAlertText()).toEqual('Authentication failed.');
+    expect(loginPage.getAlertText()).toEqual(loginPage.AUTHENTICATION_FAILDED_MSG);
   });
 
   it('should have forgot password action', function() {
     loginPage.lostPassword();
     expect(browser.getCurrentUrl()).toEqual("http://automationpractice.com/index.php?controller=password");
   });
-  
+
 });
