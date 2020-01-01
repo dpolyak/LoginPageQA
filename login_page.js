@@ -3,6 +3,8 @@ var LoginPage = function() {
   var password = element(by.id('passwd'));
   var submitLogin = element(by.id('SubmitLogin'));
   var alert = element(by.css('.alert.alert-danger ol li'));
+  var login = element(by.css('a.login'));
+  var logout = element(by.css('a.logout'));
 
   this.get = function() {
     browser.waitForAngularEnabled(false);
@@ -19,6 +21,22 @@ var LoginPage = function() {
 
   this.isSubmitButtonPresent = function() {
     return submitLogin.isPresent();
+  }
+
+  this.isLoginButtonPresent = function() {
+    return login.isPresent();
+  }
+
+  this.isLogoutButtonPresent = function() {
+    return logout.isPresent();
+  }
+
+  this.clearEmail = function() {
+    email.clear();
+  }
+
+  this.clearPassword = function() {
+    password.clear();
   }
 
   this.setEmail = function(user) {
