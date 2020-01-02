@@ -22,7 +22,7 @@ describe('Protractor Login App', function() {
     //browser.driver.sleep(2000);
   });
 
-  it('should include login elements', function() {
+  it('should have login form elements', function() {
     expect(loginPage.getLoginFormHeader()).toEqual(loginPage.LOGIN_FORM_HEADER);
     expect(loginPage.isEmailElementPresent()).toBe(true);
     expect(loginPage.isPasswordElementPresent()).toBe(true);
@@ -31,17 +31,22 @@ describe('Protractor Login App', function() {
   });
 
   it('should login and have a user info', function() {
-    login(browser.params.validEmail, browser.params.validPassword);
+    // lower case email
+    var lowerCaseEmail = browser.params.validEmail.toLowerCase();
+    login(lowerCaseEmail, browser.params.validPassword);
+    expect(accoutPage.getUserInfo()).toEqual(browser.params.userFullName);
+    accoutPage.logout();
+ 
+    // upper case email
+    var upperCaseEmail = browser.params.validEmail.toUpperCase();
+    login(upperCaseEmail, browser.params.validPassword);
     expect(accoutPage.getUserInfo()).toEqual(browser.params.userFullName);
     accoutPage.logout();
   });
 
-  it('should login and have a user info when enter upper case email', function() {
-    var upperCaseEmail = browser.params.validEmail.toUpperCase();
-
-    login(upperCaseEmail, browser.params.validPassword);
-    expect(accoutPage.getUserInfo()).toEqual(browser.params.userFullName);
-    accoutPage.logout();
+  it('should have forgot password action', function() {
+    loginPage.lostPassword();
+    expect(browser.getTitle()).toEqual(passwordPage.PAGE_TITLE);
   });
 
   it('should have an email', function() {
@@ -52,9 +57,7 @@ describe('Protractor Login App', function() {
   it('should have a valide email', function() {
     login(browser.params.wrongEmail_1, browser.params.empty);
     expect(loginPage.getAlertText()).toEqual(loginPage.INVALID_EMAIL_ADDRESS_MSG);
-  });
-
-  it('should have a valide email', function() {
+  
     login(browser.params.wrongEmail_2, browser.params.invalidPassword);
     expect(loginPage.getAlertText()).toEqual(loginPage.INVALID_EMAIL_ADDRESS_MSG);
   });
@@ -72,11 +75,6 @@ describe('Protractor Login App', function() {
   it('should have a correct password', function() {
     login(browser.params.validEmail, browser.params.wrongPassword);
     expect(loginPage.getAlertText()).toEqual(loginPage.AUTHENTICATION_FAILDED_MSG);
-  });
-
-  it('should have forgot password action', function() {
-    loginPage.lostPassword();
-    expect(browser.getTitle()).toEqual(passwordPage.PAGE_TITLE);
   });
 
 });
