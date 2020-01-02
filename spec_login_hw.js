@@ -2,7 +2,7 @@ var loginPage = require('./login_page.js');
 var accoutPage = require('./my_account_page.js');
 var passwordPage = require('./forgot_pwd_page.js');
 
-describe('Protractor Login App', function() {
+describe('Login - My Store', function() {
 
   function login(email, pwd) {
     loginPage.setEmail(email);
@@ -16,10 +16,6 @@ describe('Protractor Login App', function() {
 
   beforeEach(function() {
     loginPage.get();
-  });
-
-  afterEach(function() {
-    //browser.driver.sleep(2000);
   });
 
   it('should have login form elements', function() {
