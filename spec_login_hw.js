@@ -1,5 +1,6 @@
 var loginPage = require('./login_page.js');
 var accoutPage = require('./my_account_page.js');
+var passwordPage = require('./forgot_pwd_page.js');
 
 describe('Protractor Login App', function() {
 
@@ -75,7 +76,7 @@ describe('Protractor Login App', function() {
 
   it('should have forgot password action', function() {
     loginPage.lostPassword();
-    expect(browser.getCurrentUrl()).toEqual("http://automationpractice.com/index.php?controller=password");
+    expect(browser.getTitle()).toEqual(passwordPage.PAGE_TITLE);
   });
 
 });
