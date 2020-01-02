@@ -1,17 +1,28 @@
 Test Plan:
 
-* Test on different devices
-* Test of different browsers
+* Testing on Desktop devide, Chrome browser
 
 
-1) check elements existence
-2) should have a correct email
+1) should have 'login form elements' (header, email, pasword, lost password link, submit)
+2) should login and have a correct user info by entering correct email and password
+3) should show 'forgot password page' by clicking on 'lost password' link
+
+4) should not login and show erorr message by entering 'empty' email and 'empty' password
+5) should not login and show erorr message by entering invalid email address
+
+6) should not login and show erorr message by entering valid email and 'empty' password
+7) should not login and show erorr message by entering valid email and invalid password
+8) should not login and show erorr message by entering valid email and incorect password
 
 
-3) check empty strings x3
-4) check wrong values x3
-	
-	Password is required.
-5) check succesful  login
-6) check login option whicle already loged in
-7) check forgot password link
+Email 
+1) empty
+2) invalid
+3) not registered
+4) correct
+
+Password
+1) empty
+2) invalid
+3) wrong
+4) correct
