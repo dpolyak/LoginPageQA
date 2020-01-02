@@ -25,19 +25,19 @@ var LoginPage = function() {
 
   this.isEmailElementPresent = function() {
     return email.isPresent();
-  }
+  };
 
   this.isPasswordElementPresent = function() {
     return password.isPresent();
-  }
+  };
 
   this.isSubmitButtonPresent = function() {
     return submitLogin.isPresent();
-  }
+  };
 
   this.isLostPasswordLinkPresent = function() {
     return lostPassword.isPresent();
-  }
+  };
 
   this.setEmail = function(user) {
     email.clear();
@@ -51,11 +51,11 @@ var LoginPage = function() {
 
   this.submit = function() {
     submitLogin.click();
-  }
+  };
 
   this.lostPassword = function() {
     lostPassword.click();
-  }
+  };
 
   this.getAlertText = function() {
     return alert_message.getText();
@@ -63,11 +63,11 @@ var LoginPage = function() {
 
   this.getLoginFormHeader = function() {
     return loginFormHeader.getText();
-  }
+  };
 
   this.getLostPasswordText = function() {
     return lostPassword.getText();
-  }
+  };
 };
 
 module.exports = new LoginPage();

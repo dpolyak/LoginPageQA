@@ -4,11 +4,11 @@ var MyAccountPage = function() {
 
   this.getUserInfo = function() {
     return userInfo.getText();
-  }
+  };
 
   this.logout = function() {
     logout.click();
-  }
+  };
 
 };
 
