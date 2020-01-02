@@ -18,7 +18,7 @@ describe('Protractor Login App', function() {
   });
 
   afterEach(function() {
-    browser.driver.sleep(2000);
+    //browser.driver.sleep(2000);
   });
 
   it('should include login elements', function() {
@@ -29,45 +29,47 @@ describe('Protractor Login App', function() {
     expect(loginPage.getLostPasswordText()).toEqual(loginPage.LOST_PASSWORD_MSG);
   });
 
-  it('should have a user info', function() {
-    login('dpolyak@outbrain.com', '123qwe');
-    expect(accoutPage.getUserInfo()).toEqual('D P');
+  it('should login and have a user info', function() {
+    login(browser.params.validEmail, browser.params.validPassword);
+    expect(accoutPage.getUserInfo()).toEqual(browser.params.userFullName);
     accoutPage.logout();
   });
 
-  it('should have a user info', function() {
-    login('DPOLYAK@OUTBRAIN.COM', '123qwe');
-    expect(accoutPage.getUserInfo()).toEqual('D P');
+  it('should login and have a user info when enter upper case email', function() {
+    var upperCaseEmail = browser.params.validEmail.toUpperCase();
+
+    login(upperCaseEmail, browser.params.validPassword);
+    expect(accoutPage.getUserInfo()).toEqual(browser.params.userFullName);
     accoutPage.logout();
   });
 
   it('should have an email', function() {
-    login('', '');
+    login(browser.params.empty, browser.params.empty);
     expect(loginPage.getAlertText()).toEqual(loginPage.EMAIL_ADDRESS_REQUIRED_MSG);
   });
 
   it('should have a valide email', function() {
-    login('a', '');
+    login(browser.params.wrongEmail_1, browser.params.empty);
     expect(loginPage.getAlertText()).toEqual(loginPage.INVALID_EMAIL_ADDRESS_MSG);
   });
 
   it('should have a valide email', function() {
-    login('a@@b.com', '123');
+    login(browser.params.wrongEmail_2, browser.params.invalidPassword);
     expect(loginPage.getAlertText()).toEqual(loginPage.INVALID_EMAIL_ADDRESS_MSG);
   });
 
   it('should have a password', function() {
-    login('dpolyak@outbrain.com', '');
+    login(browser.params.validEmail, browser.params.empty);
     expect(loginPage.getAlertText()).toEqual(loginPage.PASSWORD_REQUIRED_MSG);
   });
 
   it('should have a valid password', function() {
-    login('dpolyak@outbrain.com', '123');
+    login(browser.params.validEmail, browser.params.invalidPassword);
     expect(loginPage.getAlertText()).toEqual(loginPage.INVALID_PASSWORD_MSG);
   });
 
   it('should have a correct password', function() {
-    login('dpolyak@outbrain.com', '123456');
+    login(browser.params.validEmail, browser.params.wrongPassword);
     expect(loginPage.getAlertText()).toEqual(loginPage.AUTHENTICATION_FAILDED_MSG);
   });
 
